@@ -5,6 +5,10 @@ const app = express();
 
 const port = 3000;
 
+const aiRouter = require("./routes/Ai");
+
+app.use("/api/ai", aiRouter);
+
 app.get("/", (req, res) => {
   res.send("Backend is running");
 });
