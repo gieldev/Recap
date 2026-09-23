@@ -1,4 +1,4 @@
-const quizSchema = {
+const chooseLetterSchema = {
   type: "object",
   properties: {
     question: { type: "string" },
@@ -8,4 +8,7 @@ const quizSchema = {
     },
     answer: { type: "string" },
   },
+  required: ["question", "options", "answer"],
 };
+
+module.exports = chooseLetterSchema;
