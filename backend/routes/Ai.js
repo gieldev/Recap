@@ -15,6 +15,7 @@ const chooseLetterSchema = {
   required: ["question", "options", "answer"],
 };
 
+// Creates a quiz
 router.post("/create", async (req, res) => {
   try {
     const { reference } = req.body;
