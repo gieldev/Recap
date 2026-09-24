@@ -37,3 +37,5 @@ router.post("/create", async (req, res) => {
     console.error("error", error);
   }
 });
+
+module.exports = router;
