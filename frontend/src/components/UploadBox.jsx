@@ -1,10 +1,10 @@
-function UploadBox({ handleFile, fileInputRef }) {
+function UploadBox({ handleDrop, handleFile, fileInputRef }) {
   return (
     <div
       className="w-50 h-50 flex items-center justify-center border cursor-pointer"
       onClick={() => fileInputRef.current.click()}
       onDragOver={(e) => e.preventDefault()}
-      onDrop={handleFile}
+      onDrop={handleDrop}
     >
       <h1>Upload a PDF file</h1>
 

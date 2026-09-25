@@ -45,6 +45,14 @@ function Home() {
       setReference(text);
 
       console.log("Extracted text:", text);
+
+      await fetch("http://localhost:3000/api/ai/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ reference: text }),
+      });
     }
   };
 
@@ -55,11 +63,14 @@ function Home() {
 
   return (
     <>
-
       <main>
         <section className="min-h-screen flex flex-col items-center justify-center gap-6 border">
           {!file ? (
-            <UploadBox handleFile={handleFile} fileInputRef={fileInputRef} />
+            <UploadBox
+              handleDrop={handleDrop}
+              handleFile={handleFile}
+              fileInputRef={fileInputRef}
+            />
           ) : (
             <ContentBox
               file={file}
