@@ -63,8 +63,8 @@ function Home() {
 
   return (
     <>
-      <main>
-        <section className="min-h-screen flex flex-col items-center justify-center gap-6 border">
+      <main className="flex items-center justify-center mx-8">
+        <section className="w-full min-h-screen flex flex-col items-center justify-center p-6 gap-12 md:flex-row">
           {!file ? (
             <UploadBox
               handleDrop={handleDrop}
