@@ -44,15 +44,17 @@ function Home() {
 
       setReference(text);
 
-      console.log("Extracted text:", text);
-
-      await fetch("http://localhost:3000/api/ai/create", {
+      const res = await fetch("http://localhost:3000/api/ai/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ reference: text }),
       });
+
+      const data = await res.json();
+      
+      console.log("Server response:", data);
     }
   };
 
