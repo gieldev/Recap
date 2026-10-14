@@ -8,8 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const aiRouter = require("./routes/Ai");
+const authRouter = require("./routes/Auth");
 
 app.use("/api/ai", aiRouter);
+app.use("/api/auth", authRouter);
 
 const port = 3000;
 

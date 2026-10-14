@@ -27,10 +27,9 @@ const quizSchema = {
 // Creates a quiz
 router.post("/create", async (req, res) => {
   let attempts = 0;
-  let success = false;
 
   // Retry mechanism for generating the quiz
-  while (!success && attempts < 3) {
+  while (attempts < 3) {
     attempts++;
 
     try {
@@ -56,20 +55,17 @@ router.post("/create", async (req, res) => {
         },
       });
 
-      res.json(JSON.parse(response.text));
-      success = true;
+      return res.json(JSON.parse(response.text));
     } catch (error) {
       console.error("Generation failed:", error);
 
       if (attempts >= 3) {
-        res.status(error.status || 500).json({
+        return res.status(error.status || 500).json({
           error: error.message || "Failed to generate quiz",
         });
       }
     }
   }
-
-  console.log("Retry");
 });
 
 module.exports = router;
