@@ -1,10 +1,13 @@
 const express = require("express");
+const app = express();
 require("dotenv").config();
 const cors = require("cors");
+const { connectToDatabase } = require("./config/MongoDB");
 
-const app = express();
+// Connect to MongoDB
+connectToDatabase(); 
+
 app.use(cors());
-
 app.use(express.json());
 
 const aiRouter = require("./routes/Ai");
