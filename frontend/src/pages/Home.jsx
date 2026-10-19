@@ -10,11 +10,13 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 ).toString();
 
 function Home() {
+  // State variables for file input, selected file, number of pages, and extracted reference text
   const fileInputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [reference, setReference] = useState("");
 
+  // Function to extract text from a PDF file
   const extractText = async (file) => {
     const arrayBuffer = await file.arrayBuffer();
 
@@ -65,7 +67,7 @@ function Home() {
 
   return (
     <>
-      <main className="flex items-center justify-center mx-8">
+      <main className="flex items-center justify-center px-8">
         <section className="w-full min-h-screen flex flex-col items-center justify-center p-6 gap-12 md:flex-row">
           {!file ? (
             <UploadBox
