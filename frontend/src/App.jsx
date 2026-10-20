@@ -1,4 +1,5 @@
 import {useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -12,9 +13,16 @@ function App() {
 
   return (
     <>
-      <Navbar signingIn={signingIn} setSigningIn={setSigningIn} />
-      <Signup />
-      <AuthModal signingIn={signingIn} setSigningIn={setSigningIn} />
+      <BrowserRouter>
+        <Navbar signingIn={signingIn} setSigningIn={setSigningIn} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+
+        <AuthModal signingIn={signingIn} setSigningIn={setSigningIn} />
+      </BrowserRouter>
     </>
   );
 }
