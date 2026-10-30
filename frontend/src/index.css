@@ -1,26 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* Text */
-  --color-primary: #111827;
-  --color-body: #334155;
-  --color-secondary: #64748b;
+  /* main colors */
+  --color-primary: #4F46E5;
+  --color-secondary: #818cf8;
+  --color-accent: #000000;
 
-  /* Backgrounds */
-  --color-white: #ffffff;
-  --color-surface: #f8fafc;
-  --color-highlight: #eef2ff;
+  /* backgrounds */
+  --color-neutral-bg: #ffffff;
+  --color-contrast-bg: #f5f6f8;
+  --color-surface-bg: #ffffff;
 
-  /* Borders */
+  /* text colors */
+  --color-text-primary: #111827;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #000000;
+  --color-contrast-primary: #ffffff;
+
+  /* border colors */
   --color-border: #e2e8f0;
-
-  /* Accent */
-  --color-accent: #6366f1;
-  --color-accent-dark: #4f46e5;
-  --color-accent-deep: #4338ca;
-
-  /* Accent supporting colors */
-  --color-accent-light: #c7d2fe;
-  --color-accent-pale: #e0e7ff;
-  --color-accent-soft: #818cf8;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-text-primary);
 }
