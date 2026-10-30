@@ -2,6 +2,7 @@ import {useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
+import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import Quiz from "./pages/Quiz";
 import AuthModal from "./components/AuthModal";
@@ -16,7 +17,8 @@ function App() {
       <BrowserRouter>
         <Navbar signingIn={signingIn} setSigningIn={setSigningIn} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
