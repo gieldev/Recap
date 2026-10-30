@@ -21,6 +21,12 @@ function App() {
           <Route path="/signup" element={<Signup />} />
         </Routes>
 
+        <footer className="w-full h-fit flex items-center justify-between px-8 py-6">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-gray-300"></div>
+            <span className="text-sm">RecallIt.</span>
+          </div>
+        </footer>
         <AuthModal signingIn={signingIn} setSigningIn={setSigningIn} />
       </BrowserRouter>
     </>
