@@ -13,9 +13,9 @@ function Home() {
             </h2>
             <Link
               className="w-fit px-4 py-2 text-sm text-contrast-primary bg-primary rounded-xl"
-              to={"/create"}
+              to={"/tools"}
             >
-              Start Creating
+              See Tools
             </Link>
           </div>
 
