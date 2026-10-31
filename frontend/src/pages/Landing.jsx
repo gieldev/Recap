@@ -126,7 +126,7 @@ function Landing() {
               className="w-fit h-fit flex items-center gap-4 px-4 py-2 mt-4 text-lg text-contrast-primary bg-primary border rounded-xl cursor-pointer
               "
             >
-              Explore materials
+              Get Started
               <svg
                 className="w-7 h-7 fill-neutral-bg"
                 xmlns="http://www.w3.org/2000/svg"
@@ -193,10 +193,10 @@ function Landing() {
             lg:flex-row lg:justify-between lg:px-8"
           >
             <h1 className="text-center text-4xl text-contrast-primary font-bold lg:text-start">
-              Let's build reviewers <br /> and start learning
+              Let's create reviewers <br /> and start learning
             </h1>
             <button className="px-6 py-2 text-text-primary font-bold bg-surface-bg rounded-xl cursor-pointer">
-              Start building
+              Start Creating
             </button>
           </div>
         </section>
