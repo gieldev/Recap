@@ -85,7 +85,7 @@ function Landing() {
 
   return (
     <>
-      <main className="flex flex-col items-center justify-center gap-24">
+      <main className="min-h-screen flex flex-col pt-24 gap-24">
         {/* <section className="w-full min-h-screen flex flex-col items-center justify-center p-6 gap-12 md:flex-row">
           {!file ? (
             <UploadBox
@@ -104,7 +104,7 @@ function Landing() {
         </section> */}
         {/*  Hero Section */}
         <section
-          className="w-full h-fit flex flex-col items-center justify-center px-8 pt-30 pb-6 gap-8
+          className="w-full h-fit flex flex-col items-center justify-center px-8 py-6 gap-8
           lg:flex-row lg:px-24 lg:gap-16"
         >
           <div className="flex flex-col items-center gap-4 lg:items-start">
