@@ -2,11 +2,20 @@ import {useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
+
+// Page imports
 import Landing from "./pages/Landing";
+
 import Home from "./pages/Home";
+
+// Tools page imports 
 import Tools from "./pages/Tools";
+import QuizTool from "./pages/Tools/QuizTool";
+
 import Quiz from "./pages/Quiz";
+
 import AuthModal from "./components/AuthModal";
+
 import Signup from "./pages/Signup";
 
 function App() {
@@ -19,9 +28,14 @@ function App() {
         <Navbar signingIn={signingIn} setSigningIn={setSigningIn} />
         <Routes>
           <Route path="/" element={<Landing />} />
+
           <Route path="/home" element={<Home />} />
+
           <Route path="/tools" element={<Tools />} />
+          <Route path="/tools/quiz-tool" element={<QuizTool />} />
+
           <Route path="/quiz" element={<Quiz />} />
+
           <Route path="/signup" element={<Signup />} />
         </Routes>
 
