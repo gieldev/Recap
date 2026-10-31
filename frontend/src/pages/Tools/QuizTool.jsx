@@ -2,9 +2,9 @@
 function QuizTool() {
   return (
     <>
-      
+        
     </>
   );
 }
 
-export default QuizTool;
+export default QuizTool
