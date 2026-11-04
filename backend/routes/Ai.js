@@ -2,7 +2,9 @@ const router = require("express").Router();
 const { GoogleGenAI } = require("@google/genai");
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-const quizSchema = {
+const QuizMultipleChoice = require("../models/QuizMultipleChoice");
+
+const quizMultipleChoice = {
   type: "array",
   items: {
     type: "object",
@@ -15,56 +17,88 @@ const quizSchema = {
         items: {
           type: "string",
         },
+        minItems: 4,
+        maxItems: 4,
       },
       answer: {
         type: "string",
       },
+      explanation: {
+        type: "string",
+      }
     },
-    required: ["question", "options", "answer"],
+    required: ["question", "options", "answer", "explanation"],
   },
 };
 
-// Creates a quiz
-router.post("/create", async (req, res) => {
-  let attempts = 0;
+router.post("/create/quiz/multiple-choice", async (req, res) => {
+  try {
+    const { topic, numItems, quizType, learningMaterial } = req.body;
 
-  // Retry mechanism for generating the quiz
-  while (attempts < 3) {
-    attempts++;
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash-lite",
+      contents: `
+        TOPIC: ${topic || "Infer from the learning material"}
 
-    try {
-      const { reference } = req.body;
+        REQUIRED NUMBER OF QUESTIONS: ${numItems} || "15"
 
-      const response = await ai.models.generateContent({
-        model: "gemini-3.5-flash-lite",
-        contents: reference,
-        config: {
-          systemInstruction:
-            "Generate a comprehensive multiple-choice quiz based strictly on the provided reference text. " +
-            "Identify and cover all important concepts, definitions, key terms, processes, steps, facts, and distinctions in the reference. " +
-            "Determine the number of questions based on the amount and complexity of important material. Do not use a fixed question count. " +
-            "Create enough questions to test the important points without unnecessary repetition or trivial questions. " +
-            "Each question must have exactly four options, with exactly one correct answer. " +
-            "Only use information supported by the reference text. Never invent facts or rely on outside knowledge. " +
-            "Prioritize exam-relevant information and ensure that important topics are not overlooked. " +
-            "Ignore page numbers, headers, footers, and reference lists at the ends of pages. " +
-            "Return the quiz in the required JSON schema.",
+        LEARNING MATERIAL: ${learningMaterial}
 
-          responseMimeType: "application/json",
-          responseSchema: quizSchema,
-        },
+        REMINDER: Use ONLY the learning material above. Output EXACTLY ${numItems} questions. 
+        If the material cannot support that many distinct questions, 
+        produce as many as it supports rather than inventing content.
+      `,
+      config: {
+        systemInstruction:
+          "Generate a multiple-choice quiz strictly from the provided learning material. " +
+          "Use ONLY information stated in the material. Never invent facts or use outside knowledge. " +
+          "Every correct answer must be directly supported by the material. " +
+          "Distractors must be plausible but clearly incorrect according to the material. " +
+          "Each question must have exactly four options and exactly one correct answer. " +
+          "Do not use 'all of the above' or 'none of the above'. " +
+          "Spread correct answers across all four positions. " +
+          "Cover important concepts, definitions, key terms, processes, and distinctions; avoid trivial or repetitive questions. " +
+          "Ignore page numbers, headers, footers, and reference lists. " +
+          "If a required number of questions is given, output EXACTLY that number. " +
+          "If the material cannot support that many distinct questions, produce as many as it supports rather than inventing content. " +
+          "Return the quiz in the required JSON schema.",
+        temperature: 0.2,
+        responseMimeType: "application/json",
+        responseSchema: quizMultipleChoice,
+      },
+    });
+
+    const quiz = JSON.parse(response.text);
+
+    const requestedItems = Number(numItems);
+
+    if (quiz.length !== requestedItems) {
+      console.log("Requested:", requestedItems);
+      console.log("Generated:", quiz.length);
+
+      return res.status(502).json({
+        error: "Quiz had the wrong number of questions.",
+        requested: requestedItems,
+        generated: quiz.length,
       });
-
-      return res.json(JSON.parse(response.text));
-    } catch (error) {
-      console.error("Generation failed:", error);
-
-      if (attempts >= 3) {
-        return res.status(error.status || 500).json({
-          error: error.message || "Failed to generate quiz",
-        });
-      }
     }
+
+    const newQuiz = await QuizMultipleChoice.create({
+      user: req.user.id,
+      topic: topic,
+      quizType: quizType,
+      questions: quiz,
+    });
+
+    return res.status(201).json({
+      message: "Quiz generated successfully.",
+      quizId: newQuiz._id,
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(error.status || 500)
+      .json({ error: "Failed to generate quiz." });
   }
 });
 

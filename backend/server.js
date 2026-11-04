@@ -10,11 +10,17 @@ connectToDatabase();
 app.use(cors());
 app.use(express.json());
 
-const aiRouter = require("./routes/Ai");
-const authRouter = require("./routes/Auth");
+const authMiddleware = require("./middleware/middleware");
 
-app.use("/api/ai", aiRouter);
+const authRouter = require("./routes/Auth");
+const aiRouter = require("./routes/Ai");
+const user = require("./routes/User");
+
+app.use("/auth-middleware", authMiddleware);
+
 app.use("/api/auth", authRouter);
+app.use("/api/ai", authMiddleware, aiRouter);
+app.use("/data/user", authMiddleware, user);
 
 const port = 3000;
 
