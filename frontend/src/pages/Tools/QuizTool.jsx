@@ -1,4 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { pdfjs } from "react-pdf";
+import { useNavigate } from "react-router-dom";
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url,
+).toString();
 
 function QuizTool() {
   // State variables for file input, selected file, number of pages, and extracted reference text
@@ -8,8 +15,89 @@ function QuizTool() {
   const [reference, setReference] = useState("");
   const [instructions, setInstructions] = useState("");
 
+  const fileInputRef = useRef(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const navigation = useNavigate();
+
+  const handleFile = async (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      setSelectedFile(file);
+    }
+
+    const buffer = await file.arrayBuffer();
+
+    const pdf = await pdfjs.getDocument({
+      data: buffer,
+    }).promise;
+
+    let text = "";
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+
+      const pageText = content.items.map((item) => item.str).join(" ");
+
+      text += pageText + "\n";
+    }
+
+    setReference(text);
+
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!topic) {
+      return alert("Please enter a topic.");
+    }
+
+    if (!numItems) {
+      return alert("Please enter the number of items.");
+    }
+
+    if (!quizType) {
+      return alert("Please select a quiz type.");
+    }
+
+    if (!reference) {
+      return alert("Please upload a PDF file.");
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(`http://localhost:3000/api/ai/create/quiz/${quizType}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          topic,
+          numItems,
+          quizType,
+          learningMaterial: reference,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to generate quiz.");
+      }
+
+      const quiz = await response.json();
+
+      console.log("Generated Quiz:", quiz);
+      alert("Quiz generated successfully! Check the console for details.");
+
+      navigation(`/quiz/${quiz.quizId}`, { replace: true });
+    } catch (error) {
+      console.error(error);
+      return alert("Failed to generate quiz.");
+    }
   };
 
   return (
@@ -57,7 +145,12 @@ function QuizTool() {
                 <div className="w-8 h-10 bg-gray-300"></div>
                 <h2 className="text-sm font-semibold">Upload a file</h2>
               </div>
-              <button className="px-4 py-2 text-neutral-bg bg-accent border rounded-xl">
+              <input type="file" accept=".pdf" ref={fileInputRef} onChange={handleFile} hidden />
+              <button
+                className="px-4 py-2 text-neutral-bg bg-accent border rounded-xl"
+                onClick={() => fileInputRef.current.click()}
+                type="button"
+              >
                 Upload
               </button>
             </div>
@@ -74,7 +167,10 @@ function QuizTool() {
               />
             </div>
 
-            <button className="px-4 py-2 text-contrast-primary bg-primary rounded-xl" type="submit">
+            <button
+              className="px-4 py-2 text-contrast-primary bg-primary rounded-xl"
+              type="submit"
+            >
               Submit
             </button>
           </form>
