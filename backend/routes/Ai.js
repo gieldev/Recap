@@ -21,7 +21,9 @@ const quizMultipleChoice = {
         maxItems: 4,
       },
       answer: {
-        type: "string",
+        type: "integer",
+        minimum: 0,
+        maximum: 3
       },
       explanation: {
         type: "string",
@@ -93,6 +95,7 @@ router.post("/create/quiz/multiple-choice", async (req, res) => {
     return res.status(201).json({
       message: "Quiz generated successfully.",
       quizId: newQuiz._id,
+      quiz: quiz,
     });
   } catch (error) {
     console.error(error);
