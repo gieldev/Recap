@@ -103,7 +103,10 @@ function QuizTool() {
   return (
     <>
       <main className="min-h-screen flex flex-col pt-24 gap-24">
-        <section className="w-full h-fit flex flex-col px-8 py-6 gap-8">
+        <section
+          className="w-full h-fit flex flex-col px-8 py-6 gap-8
+          lg:px-24 lg:gap-16"
+        >
           <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
             <div className="w-full flex flex-col gap-1">
               <label className="text-sm font-semibold">Topic</label>
@@ -145,7 +148,13 @@ function QuizTool() {
                 <div className="w-8 h-10 bg-gray-300"></div>
                 <h2 className="text-sm font-semibold">Upload a file</h2>
               </div>
-              <input type="file" accept=".pdf" ref={fileInputRef} onChange={handleFile} hidden />
+              <input
+                type="file"
+                accept=".pdf"
+                ref={fileInputRef}
+                onChange={handleFile}
+                hidden
+              />
               <button
                 className="px-4 py-2 text-neutral-bg bg-accent border rounded-xl"
                 onClick={() => fileInputRef.current.click()}

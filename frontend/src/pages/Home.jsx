@@ -37,7 +37,10 @@ function Home() {
     <>
       <main className="min-h-screen flex flex-col pt-24 gap-24">
         {/* List of learning tools */}
-        <section className="w-full h-fit flex flex-col px-8 py-6 gap-8">
+        <section
+          className="w-full h-fit flex flex-col px-8 py-6 gap-8 
+          lg:px-24 lg:gap-16"
+        >
           <div className="flex items-center justify-between px-4 py-2 gap-2 border-2 border-dashed rounded-xl">
             <h2 className="text-md">
               Start making your <br /> reviewers

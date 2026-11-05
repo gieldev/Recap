@@ -78,7 +78,10 @@ function Quiz() {
   return (
     <>
       <main className="min-h-screen flex flex-col pt-24 gap-24">
-        <section className="w-full h-fit flex flex-col px-8 py-6 gap-8">
+        <section
+          className="w-full h-fit flex flex-col px-8 py-6 gap-8 
+          lg:px-24 lg:gap-16"
+        >
           {finished ? (
             <div>
               {quizData ? (
@@ -196,9 +199,7 @@ function Quiz() {
                             setFinished(true);
                           }
                         }}
-                        disabled={
-                          userQuizData[currentQuestion - 1] == null
-                        }
+                        disabled={userQuizData[currentQuestion - 1] == null}
                       >
                         Next Question
                       </button>

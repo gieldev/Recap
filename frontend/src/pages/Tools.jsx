@@ -4,11 +4,17 @@ function Tools() {
   return (
     <>
       <main className="min-h-screen flex flex-col pt-24 gap-24">
-        <section className="w-full h-fit flex flex-col px-8 py-6 gap-8">
+        <section
+          className="w-full h-fit flex flex-col px-8 py-6 gap-8
+          lg:px-24 lg:gap-16"
+        >
           <h2 className="text-2xl font-bold">Choose a tool</h2>
           <div className="w-full grid grid-cols-1 px-2 py-2 gap-4 bg-contrast-bg border border-border rounded-xl">
             {/* Button */}
-            <Link className="flex flex-col px-4 py-6 gap-4 bg-neutral-bg rounded-xl cursor-pointer" to={"/tools/quiz-tool"}>
+            <Link
+              className="flex flex-col px-4 py-6 gap-4 bg-neutral-bg rounded-xl cursor-pointer"
+              to={"/tools/quiz-tool"}
+            >
               <div className="flex items-center justify-between">
                 <div className="h-12 w-12 bg-gray-300"></div>
                 <svg
