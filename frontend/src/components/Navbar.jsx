@@ -59,7 +59,7 @@ function Navbar({ setSigningIn }) {
           </svg>
           <ul className="gap-4 cursor-pointer hidden lg:flex">
             {links.map((link, index) => (
-              <li>
+              <li key={index}>
                 <Link to={link.to}>{link.content}</Link>
               </li>
             ))}
@@ -86,7 +86,7 @@ function Navbar({ setSigningIn }) {
         <nav>
           <ul className="flex flex-col items-end px-8 py-6 gap-4">
               {links.map((link, index) => (
-                <li>
+                <li key={index}>
                   <Link className="text-lg" to={link.to}>{link.content}</Link>
                 </li>
               ))}
