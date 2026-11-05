@@ -24,7 +24,7 @@ function Signup() {
   };
 
   return (
-    <main>
+    <main className="w-full min-h-screen flex items-center">
       <form onSubmit={handleSignUp}>
         <input
           type="text"
