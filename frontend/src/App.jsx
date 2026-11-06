@@ -1,53 +1,28 @@
-import {useState } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
+// App Pages
+import Dashboard from "./AppPages/Dashboard";
+import Reviewers from "./AppPages/Reviewers";
+import Create from "./AppPages/Create";
 
-// Page imports
-import Landing from "./pages/Landing";
-
-import Home from "./pages/Home";
-
-// Tools page imports 
-import Tools from "./pages/Tools";
-import QuizTool from "./pages/Tools/QuizTool";
-
-import Quiz from "./pages/Quiz";
-
-import AuthModal from "./components/AuthModal";
-
-import Signup from "./pages/Signup";
+// Global Components
+import Sidebar from "./AppComponents/Sidebar";
 
 function App() {
-  // State variables for styling
-  const [signingIn, setSigningIn] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <>
-      <BrowserRouter>
-        <Navbar signingIn={signingIn} setSigningIn={setSigningIn} />
+    <BrowserRouter>
+      <div className="flex">
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <Routes>
-          <Route path="/" element={<Landing />} />
-
-          <Route path="/home" element={<Home />} />
-
-          <Route path="/tools" element={<Tools />} />
-          <Route path="/tools/quiz-tool" element={<QuizTool />} />
-
-          <Route path="/quiz/:id" element={<Quiz />} />
-
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/reviewers" element={<Reviewers />} />
+          <Route path="/create" element={<Create />} />
         </Routes>
-
-        <footer className="w-full h-fit flex items-center justify-between px-8 py-6">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gray-300"></div>
-            <span className="text-sm">RecallIt.</span>
-          </div>
-        </footer>
-        <AuthModal signingIn={signingIn} setSigningIn={setSigningIn} />
-      </BrowserRouter>
-    </>
+      </div>
+    </BrowserRouter>
   );
 }
 

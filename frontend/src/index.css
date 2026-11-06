@@ -20,6 +20,9 @@
 
   /* border colors */
   --color-border: #e2e8f0;
+
+  /* hover colors */
+  --color-highlight: #F3F4F6;
 }
 body {
   font-family: 'Poppins', sans-serif;
