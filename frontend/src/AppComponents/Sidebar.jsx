@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
-
   return (
     <aside
       className={`top-0 left-0 h-screen w-72 flex flex-col px-4 py-4 gap-4 bg-neutral-bg
@@ -44,7 +43,10 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       </header>
 
       <div className="w-full flex">
-        <button className="w-full h-8 flex items-center p-2 gap-2 text-sm font-medium text-contrast-primary bg-primary rounded-md cursor-pointer">
+        <Link
+          className="w-full h-8 flex items-center p-2 gap-2 text-sm font-medium text-contrast-primary bg-primary rounded-md cursor-pointer"
+          to={"/app/create"}
+        >
           <svg
             className="fill-contrast-primary rounded-full"
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +58,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
           </svg>
           Create Reviewer
-        </button>
+        </Link>
       </div>
 
       <div className="w-full flex">
@@ -64,7 +66,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
           <li className="w-full">
             <Link
               className="w-full h-8 flex items-center p-2 gap-2 text-sm font-medium rounded-md hover:bg-highlight"
-              to={"/dashboard"}
+              to={"/app/dashboard"}
             >
               <svg
                 className="lucide lucide-layout-dashboard preview-icon"
@@ -87,7 +89,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             </Link>
             <Link
               className="w-full h-8 flex items-center p-2 gap-2 text-sm font-medium rounded-md hover:bg-highlight"
-              to={"/reviewers"}
+              to={"/app/reviewers"}
             >
               <svg
                 className="lucide lucide-files preview-icon"

@@ -17,9 +17,9 @@ function App() {
       <div className="flex">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/reviewers" element={<Reviewers />} />
-          <Route path="/create" element={<Create />} />
+          <Route path="/app/dashboard" element={<Dashboard />} />
+          <Route path="/app/reviewers" element={<Reviewers />} />
+          <Route path="/app/create" element={<Create />} />
         </Routes>
       </div>
     </BrowserRouter>
