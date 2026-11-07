@@ -28,3 +28,8 @@ body {
   font-family: 'Poppins', sans-serif;
   color: var(--color-text-primary);
 }
+
+input:focus, select:focus, textarea:focus {
+  outline: 3px solid rgba(99, 101, 241, 0.301);
+  border-color: var(--color-border);
+}

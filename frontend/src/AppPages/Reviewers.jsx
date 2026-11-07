@@ -2,7 +2,7 @@
 function Reviewers() {
   return (
     <>
-      <main className="flex-1 flex flex-col h-screen px-16 py-16 gap-4 bg-contrast-bg">
+      <main className="flex-1 flex flex-col h-screen px-16 py-16 gap-8 bg-contrast-bg">
         <header>
           <h1 className="text-2xl font-bold">Reviewers</h1>
         </header>

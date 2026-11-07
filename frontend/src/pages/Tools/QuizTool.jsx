@@ -1,11 +1,4 @@
-import { useState, useRef } from "react";
-import { pdfjs } from "react-pdf";
-import { useNavigate } from "react-router-dom";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url,
-).toString();
 
 function QuizTool() {
   // State variables for file input, selected file, number of pages, and extracted reference text

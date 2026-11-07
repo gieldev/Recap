@@ -8,6 +8,7 @@ import Create from "./AppPages/Create";
 
 // Global Components
 import Sidebar from "./AppComponents/Sidebar";
+import MultipleChoices from "./AppPages/CreatePages/MultipleChoices";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -20,6 +21,8 @@ function App() {
           <Route path="/app/dashboard" element={<Dashboard />} />
           <Route path="/app/reviewers" element={<Reviewers />} />
           <Route path="/app/create" element={<Create />} />
+
+          <Route path="/app/create/multiple-choices" element={<MultipleChoices />} />
         </Routes>
       </div>
     </BrowserRouter>
