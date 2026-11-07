@@ -29,7 +29,15 @@ body {
   color: var(--color-text-primary);
 }
 
-input:focus, select:focus, textarea:focus {
-  outline: 3px solid rgba(99, 101, 241, 0.301);
-  border-color: var(--color-border);
+input,
+select,
+textarea {
+  outline: 3px solid transparent;
+  transition: outline-color 300ms ease, border-color 300ms ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline-color: rgba(99, 101, 241, 0.301);
 }

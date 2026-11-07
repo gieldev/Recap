@@ -104,7 +104,6 @@ function MultipleChoices() {
 
   return (
     <>
-      <main className="flex-1 flex flex-col min-h-screen h-fit px-16 py-16 gap-8 bg-contrast-bg">
         <header className="flex items-center gap-4">
           <Link to={"/app/create"}>
             <svg
@@ -208,7 +207,6 @@ function MultipleChoices() {
             </button>
           </form>
         </div>
-      </main>
     </>
   );
 }
