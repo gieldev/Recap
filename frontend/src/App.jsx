@@ -23,9 +23,9 @@ function App() {
       )}
 
       <Routes>
-        <Route path="/app/dashboard" element={<Dashboard />} />
-        <Route path="/app/reviewers" element={<Reviewers />} />
-        <Route path="/app/create" element={<Create />} />
+        <Route path="/app/dashboard" element={<Dashboard sidebarOpen={sidebarOpen} />} />
+        <Route path="/app/reviewers" element={<Reviewers sidebarOpen={sidebarOpen} />} />
+        <Route path="/app/create" element={<Create sidebarOpen={sidebarOpen} />} />
 
         <Route
           path="/app/create/multiple-choices"

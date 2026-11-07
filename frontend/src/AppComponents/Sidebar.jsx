@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
   return (
     <aside
-      className={`top-0 left-0 h-screen w-72 flex flex-col px-4 py-4 gap-4 bg-neutral-bg
-    ${sidebarOpen ? "fixed lg:static translate-x-0" : "fixed -translate-x-full"}`}
+      className={`top-0 left-0 h-screen w-72 flex flex-col px-4 py-4 gap-4 bg-neutral-bg transition-all duration-300
+    ${sidebarOpen ? "fixed -translate-x-full" : "fixed lg:fixed translate-x-0"}`}
     >
       <header className="h-8 flex items-center justify-between">
         <div className="h-8 flex items-center p-2 gap-2 rounded-md cursor-pointer transition-colors duration-300 hover:bg-highlight">
@@ -21,8 +21,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
         </div>
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className={`absolute w-8 h-8 flex items-center justify-center rounded-md cursor-pointer transition-colors duration-300 hover:bg-highlight
-      ${sidebarOpen ? "right-4" : "-right-12"}`}
+          className={`absolute w-8 h-8 flex items-center justify-center rounded-md cursor-pointer transition-all duration-300 hover:bg-highlight
+      ${sidebarOpen ? "-right-12" : "right-4"}`}
         >
           <svg
             className="lucide lucide-panel-left preview-icon"

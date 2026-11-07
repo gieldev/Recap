@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { pdfjs } from "react-pdf";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -106,20 +106,22 @@ function MultipleChoices() {
     <>
       <main className="flex-1 flex flex-col min-h-screen h-fit px-16 py-16 gap-8 bg-contrast-bg">
         <header className="flex items-center gap-4">
-          <svg
-            className="lucide lucide-layout-dashboard preview-icon cursor-pointer transition-colors duration-300 hover:bg-highlight"
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="m15 18-6-6 6-6" />
-          </svg>
+          <Link to={"/app/create"}>
+            <svg
+              className="lucide lucide-layout-dashboard preview-icon flex items-center justify-center rounded-md cursor-pointer transition-colors duration-300 hover:bg-highlight"
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </Link>
           <h2 className="text-2xl font-bold">Multiple Choices</h2>
         </header>
 
