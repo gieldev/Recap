@@ -1,38 +1,37 @@
 import { useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // App Pages
 import Dashboard from "./AppPages/Dashboard";
 import Reviewers from "./AppPages/Reviewers";
 import Create from "./AppPages/Create";
 
-// Global Components
-import Sidebar from "./AppComponents/Sidebar";
+// Create Pages
 import MultipleChoices from "./AppPages/CreatePages/MultipleChoices";
 
-function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const location = useLocation();
+// Global Components
+import PageContainer from "./AppComponents/PageContainer";
 
-  const isAppRoute = location.pathname.startsWith("/app");
+function App() {
 
   return (
-    <div className="flex">
-      {isAppRoute && (
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      )}
-
       <Routes>
-        <Route path="/app/dashboard" element={<Dashboard sidebarOpen={sidebarOpen} />} />
-        <Route path="/app/reviewers" element={<Reviewers sidebarOpen={sidebarOpen} />} />
-        <Route path="/app/create" element={<Create sidebarOpen={sidebarOpen} />} />
-
         <Route
-          path="/app/create/multiple-choices"
-          element={<MultipleChoices />}
-        />
+          path="/app"
+          element={<PageContainer />}
+        >
+          {/* App Pages */}
+          <Route path="/app/dashboard" element={<Dashboard />} />
+          <Route path="/app/reviewers" element={<Reviewers />} />
+          <Route path="/app/create" element={<Create />} />
+
+          {/* Create App Pages */}
+          <Route
+            path="/app/create/multiple-choices"
+            element={<MultipleChoices />}
+          />
+        </Route>
       </Routes>
-    </div>
   );
 }
 
