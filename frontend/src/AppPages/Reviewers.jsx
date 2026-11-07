@@ -12,17 +12,16 @@ function Reviewers() {
             <div className="flex items-center justify-between">
               <span className="text-xs font-medium">Reviewer Type</span>
               <svg
-                className="w-5 h-5 text-transparent rounded-full transition-colors duration-300 group-hover:text-text-secondary"
+                className="lucide lucide-ellipsis preview-icon w-5 h-5 text-transparent rounded-full transition-colors duration-300 group-hover:text-text-secondary"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-ellipsis preview-icon"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <circle cx="12" cy="12" r="1" />
                 <circle cx="19" cy="12" r="1" />
@@ -37,10 +36,12 @@ function Reviewers() {
               </p>
             </div>
 
-            <div>
+            <div className="flex items-center justify-between">
               <span className="text-sm font-medium text-text-secondary">
                 No. of Questions
               </span>
+
+              <button className="px-2 py-1 text-sm font-base text-transparent bg-transparent rounded-md cursor-pointer transition-colors group-hover:text-contrast-primary group-hover:bg-primary">Review</button>
             </div>
           </div>
         </div>

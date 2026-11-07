@@ -26,16 +26,16 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       ${sidebarOpen ? "right-4" : "-right-12"}`}
         >
           <svg
+            className="lucide lucide-panel-left preview-icon"
             xmlns="http://www.w3.org/2000/svg"
             width="22"
             height="22"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-panel-left preview-icon"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <rect width="18" height="18" x="3" y="3" rx="2" />
             <path d="M9 3v18" />
@@ -62,18 +62,21 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       <div className="w-full flex">
         <ul className="w-full">
           <li className="w-full">
-            <Link className="w-full h-8 flex items-center p-2 gap-2 text-sm font-medium rounded-md hover:bg-highlight" to={"/dashboard"}>
+            <Link
+              className="w-full h-8 flex items-center p-2 gap-2 text-sm font-medium rounded-md hover:bg-highlight"
+              to={"/dashboard"}
+            >
               <svg
+                className="lucide lucide-layout-dashboard preview-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
                 height="22"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-layout-dashboard preview-icon"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <rect width="7" height="9" x="3" y="3" rx="1" />
                 <rect width="7" height="5" x="14" y="3" rx="1" />
@@ -82,18 +85,21 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
               </svg>
               Dashboard
             </Link>
-            <Link className="w-full h-8 flex items-center p-2 gap-2 text-sm font-medium rounded-md hover:bg-highlight" to={"/reviewers"}>
+            <Link
+              className="w-full h-8 flex items-center p-2 gap-2 text-sm font-medium rounded-md hover:bg-highlight"
+              to={"/reviewers"}
+            >
               <svg
+                className="lucide lucide-files preview-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
                 height="22"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-files preview-icon"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="M15 2h-4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8" />
                 <path d="M16.706 2.706A2.4 2.4 0 0 0 15 2v5a1 1 0 0 0 1 1h5a2.4 2.4 0 0 0-.706-1.706z" />
