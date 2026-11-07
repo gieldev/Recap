@@ -2,7 +2,7 @@
 function Reviewers() {
   return (
     <>
-      <main className="flex-1 flex flex-col h-screen px-16 py-16 gap-8 bg-contrast-bg">
+      <main className="flex-1 flex flex-col min-h-screen h-fit px-16 py-16 gap-8 bg-contrast-bg">
         <header>
           <h1 className="text-2xl font-bold">Reviewers</h1>
         </header>
@@ -41,7 +41,9 @@ function Reviewers() {
                 No. of Questions
               </span>
 
-              <button className="px-2 py-1 text-sm font-base text-transparent bg-transparent rounded-md cursor-pointer transition-colors group-hover:text-contrast-primary group-hover:bg-primary">Review</button>
+              <button className="px-2 py-1 text-sm font-base text-transparent bg-transparent rounded-md cursor-pointer transition-colors group-hover:text-contrast-primary group-hover:bg-primary">
+                Review
+              </button>
             </div>
           </div>
         </div>

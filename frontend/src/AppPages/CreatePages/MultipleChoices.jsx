@@ -104,7 +104,7 @@ function MultipleChoices() {
 
   return (
     <>
-      <main className="flex-1 flex flex-col h-screen px-16 py-16 gap-8 bg-contrast-bg">
+      <main className="flex-1 flex flex-col min-h-screen h-fit px-16 py-16 gap-8 bg-contrast-bg">
         <header className="flex items-center gap-4">
           <svg
             className="lucide lucide-layout-dashboard preview-icon cursor-pointer transition-colors duration-300 hover:bg-highlight"
