@@ -83,10 +83,6 @@ function Reviewers() {
               <span className="text-sm font-medium text-text-secondary">
                 {reviewer.questions.length} items
               </span>
-
-              <button className="px-2 py-1 text-sm font-base text-transparent bg-transparent rounded-md cursor-pointer transition-colors group-hover:text-contrast-primary group-hover:bg-primary">
-                Review
-              </button>
             </div>
           </div>
         ))}
