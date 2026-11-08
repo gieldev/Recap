@@ -9,6 +9,9 @@ import Create from "./AppPages/Create";
 // Create Pages
 import MultipleChoices from "./AppPages/CreatePages/MultipleChoices";
 
+// Reviewer Pages
+import MultipleChoicesQuiz from "./AppPages/ReviewerPages/MultipleChoicesQuiz";
+
 // Global Components
 import PageContainer from "./AppComponents/PageContainer";
 
@@ -29,6 +32,12 @@ function App() {
           <Route
             path="/app/create/multiple-choices"
             element={<MultipleChoices />}
+          />
+
+          {/* Review App Pages */}
+          <Route
+            path="/app/reviewer/multiple-choices/:id"
+            element={<MultipleChoicesQuiz />}
           />
         </Route>
       </Routes>
