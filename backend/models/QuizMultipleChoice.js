@@ -42,6 +42,12 @@ const quizMultipleChoiceSchema = new mongoose.Schema({
     trim: true,
   },
 
+  description: {
+    type: String,
+    required: false,
+    trim: true,
+  },
+
   quizType: {
     type: String,
     required: true,

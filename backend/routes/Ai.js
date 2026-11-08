@@ -35,7 +35,7 @@ const quizMultipleChoice = {
 
 router.post("/create/quiz/multiple-choice", async (req, res) => {
   try {
-    const { topic, numItems, quizType, learningMaterial } = req.body;
+    const { topic, description, numItems, quizType, learningMaterial } = req.body;
 
     const response = await ai.models.generateContent({
       model: "gemini-3.5-flash-lite",
@@ -88,6 +88,7 @@ router.post("/create/quiz/multiple-choice", async (req, res) => {
     const newQuiz = await QuizMultipleChoice.create({
       user: req.user.id,
       topic: topic,
+      description: description,
       quizType: quizType,
       questions: quiz,
     });
