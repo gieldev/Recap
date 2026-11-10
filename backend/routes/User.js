@@ -1,6 +1,9 @@
 const router = require("express").Router();
 
 const QuizMultipleChoice = require("../models/QuizMultipleChoice");
+const {
+  MultipleChoicesDownloadHTML,
+} = require("../utils/MultipleChoicesDownloadHTML.js");
 
 router.get("/reviewers", async (req, res) => {
   try {
@@ -38,16 +41,53 @@ router.delete("/reviewers/delete", async (req, res) => {
 
     if (!reviewer) {
       return res.status(404).json({
-        message: "reviewer not found"
+        message: "reviewer not found",
       });
     }
 
     return res.status(200).json({
-      message: "reviewer deleted"
+      message: "reviewer deleted",
     });
   } catch (error) {
     res.status(500).json({
-      message: error.message 
+      message: error.message,
+    });
+  }
+});
+
+router.post("/reviewers/download", async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    const reviewer = await QuizMultipleChoice.findOne({
+      _id: id,
+      user: req.user.id,
+    });
+
+    if (!reviewer) {
+      return res.status(404).json({
+        message: "Reviewer not found",
+      });
+    }
+
+    const html = MultipleChoicesDownloadHTML(reviewer);
+
+    const filename =
+      `${reviewer.topic}`.replace(/[^a-zA-Z0-9-_ ]/g, "").trim() || "reviewer";
+
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="${filename}.html"`,
+    );
+
+    return res.send(html);
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Failed to download reviewer",
     });
   }
 });

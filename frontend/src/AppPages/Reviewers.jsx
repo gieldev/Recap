@@ -74,6 +74,47 @@ function Reviewers() {
     } catch (error) {}
   };
 
+  const downloadReviewer = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        "http://localhost:3000/data/user/reviewers/download",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            id,
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to download reviewer");
+      }
+
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "reviewer.html";
+
+      document.body.appendChild(link);
+      link.click();
+
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download error:", error);
+    }
+  };
+
   return (
     <>
       <header>
@@ -127,7 +168,14 @@ function Reviewers() {
                   >
                     Delete
                   </button>
-                  <button className="text-start text-sm cursor-pointer">
+                  <button
+                    className="text-start text-sm cursor-pointer"
+                    onClick={(event) => {
+                      downloadReviewer(reviewer._id);
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }}
+                  >
                     Download
                   </button>
                 </div>
