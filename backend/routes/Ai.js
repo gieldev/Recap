@@ -33,7 +33,7 @@ const quizMultipleChoice = {
   },
 };
 
-router.post("/create/quiz/multiple-choice", async (req, res) => {
+router.post("/create/quiz/multiple-choices", async (req, res) => {
   try {
     const { topic, description, numItems, quizType, learningMaterial } = req.body;
 

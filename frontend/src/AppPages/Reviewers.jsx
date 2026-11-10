@@ -1,8 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 function Reviewers() {
   const [reviewers, setReviewers] = useState([]);
+  const [visible, setVisible] = useState(null);
+  const popupRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setVisible(null);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const fetchUserData = async () => {
     try {
@@ -33,13 +49,38 @@ function Reviewers() {
     fetchUserData();
   }, []);
 
+  const deleteReviewer = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        "http://localhost:3000/data/user/reviewers/delete",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            id,
+          }),
+        },
+      );
+
+      const res = await response.json();
+
+      console.log(res);
+      window.location.reload();
+    } catch (error) {}
+  };
+
   return (
     <>
       <header>
         <h1 className="text-2xl font-bold">Reviewers</h1>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4" ref={popupRef}>
         {reviewers.map((reviewer, index) => (
           <Link
             className="group h-48 flex flex-col justify-between p-2 gap-4 bg-neutral-bg border border-border rounded-md shadow cursor-pointer transition-transform duration-300 hover:scale-101"
@@ -48,22 +89,49 @@ function Reviewers() {
           >
             <div className="flex items-center justify-between">
               <span className="text-xs font-medium">{reviewer.quizType}</span>
-              <svg
-                className="lucide lucide-ellipsis preview-icon w-5 h-5 text-transparent rounded-full transition-colors duration-300 group-hover:text-text-secondary"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="1" />
-                <circle cx="19" cy="12" r="1" />
-                <circle cx="5" cy="12" r="1" />
-              </svg>
+              <div className="relative">
+                <svg
+                  className="w-5 h-5 text-text-secondary transition-colors duration-300 group-hover:text-text-secondary"
+                  onClick={(event) => {
+                    if (visible != index) {
+                      setVisible(index);
+                    } else {
+                      setVisible(null);
+                    }
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="19" cy="12" r="1" />
+                  <circle cx="5" cy="12" r="1" />
+                </svg>
+
+                <div
+                  className={`absolute top-full right-0 flex flex-col p-2 gap-1 bg-neutral-white border border-border rounded-md shadow z-10 ${visible === index ? "block" : "hidden"}`}
+                >
+                  <button
+                    className="text-start text-sm cursor-pointer"
+                    onClick={(event) => {
+                      deleteReviewer(reviewer._id);
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button className="text-start text-sm cursor-pointer">
+                    Download
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div className="flex flex-col gap-1">
