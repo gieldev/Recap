@@ -12,13 +12,25 @@ import MultipleChoices from "./AppPages/CreatePages/MultipleChoices";
 // Reviewer Pages
 import MultipleChoicesQuiz from "./AppPages/ReviewerPages/MultipleChoicesQuiz";
 
-// Global Components
+// Global App Components
 import PageContainer from "./AppComponents/PageContainer";
+
+// Global Pages
+import Auth from "./GlobalPages/Auth";
+
+// Global Components
+import SignUp from "./GlobalComponents/SignUp";
+import SignIn from "./GlobalComponents/SignIn";
 
 function App() {
 
   return (
       <Routes>
+        <Route path="/auth" element={<Auth />}>
+          <Route path="/auth/signup" element={<SignUp />} />
+          <Route path="/auth/signin" element={<SignIn />} />
+        </Route>
+        
         <Route
           path="/app"
           element={<PageContainer />}

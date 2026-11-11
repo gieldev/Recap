@@ -8,20 +8,24 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
   const [open, setOpen] = useState(false);
   const popupRef = useRef(null);
-  
-    useEffect(() => {
-      function handleClickOutside(event) {
-        if (popupRef.current && !popupRef.current.contains(event.target)) {
-          setOpen(false);
-        }
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setOpen(false);
       }
-  
-      document.addEventListener("mousedown", handleClickOutside);
-  
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, []);
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+  }
 
   return (
     <aside
@@ -30,7 +34,10 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
     >
       <header className="h-8 flex items-center justify-between">
         <div className="relative h-8 flex cursor-pointer ">
-          <div className=" flex items-center p-2 gap-2 rounded-md transition-colors duration-300 hover:bg-highlight" onClick={() => setOpen(!open)}>
+          <div
+            className=" flex items-center p-2 gap-2 rounded-md transition-colors duration-300 hover:bg-highlight"
+            onClick={() => setOpen(!open)}
+          >
             <p className="text-sm font-semibold">{decoded.username}</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -49,8 +56,11 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
           >
             <ul className="w-full flex flex-col">
               <li className="flex w-full">
-                <button className="w-full p-2 text-start text-sm rounded-md cursor-pointer hover:bg-highlight">
-                  Logout
+                <button
+                  className="w-full p-2 text-start text-sm rounded-md cursor-pointer hover:bg-highlight"
+                  onClick={handleSignOut}
+                >
+                  Sign out
                 </button>
               </li>
             </ul>
