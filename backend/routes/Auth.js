@@ -14,15 +14,15 @@ router.post("/signin", async (req, res) => {
       });
     }
 
-    const user = await users.find((user) => user.email === email);
-    
+    const user = await User.findOne({ email });
+
     if (!user) {
       return res.status(400).json({
         message: "User does not exist",
       });
     }
 
-    const isPasswordValid = user.password === password;
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
       return res.status(400).json({
@@ -30,19 +30,34 @@ router.post("/signin", async (req, res) => {
       });
     }
 
+    const token = jwt.sign(
+      {
+        id: user._id,
+        username: user.username,
+      },
+      process.env.JWT_TOKEN_KEY,
+      {
+        expiresIn: "7d",
+      },
+    );
+
     return res.status(200).json({
       message: "Signed in successfully",
+      token,
       user: {
+        username: user.username,
         email: user.email,
       },
     });
-
   } catch (error) {
+    console.error("Sign in error:", error);
+
     return res.status(500).json({
       message: "Server error",
-    })
+    });
   }
 });
+
 
 router.post("/signup", async (req, res) => {
   try {
