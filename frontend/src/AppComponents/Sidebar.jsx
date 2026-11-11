@@ -1,23 +1,60 @@
 import { Link } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { useState, useRef, useEffect } from "react";
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  const token = localStorage.getItem("token");
+  const decoded = jwtDecode(token);
+
+  const [open, setOpen] = useState(false);
+  const popupRef = useRef(null);
+  
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (popupRef.current && !popupRef.current.contains(event.target)) {
+          setOpen(false);
+        }
+      }
+  
+      document.addEventListener("mousedown", handleClickOutside);
+  
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
+
   return (
     <aside
       className={`top-0 left-0 h-screen w-72 flex flex-col px-4 py-4 gap-4 bg-neutral-bg transition-all duration-300
     ${sidebarOpen ? "fixed -translate-x-full" : "fixed lg:fixed translate-x-0"}`}
     >
       <header className="h-8 flex items-center justify-between">
-        <div className="h-8 flex items-center p-2 gap-2 rounded-md cursor-pointer transition-colors duration-300 hover:bg-highlight">
-          <p className="text-sm font-semibold">User</p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="12"
-            fill="#000000"
-            viewBox="0 0 256 256"
+        <div className="relative h-8 flex cursor-pointer ">
+          <div className=" flex items-center p-2 gap-2 rounded-md transition-colors duration-300 hover:bg-highlight" onClick={() => setOpen(!open)}>
+            <p className="text-sm font-semibold">{decoded.username}</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              fill="#000000"
+              viewBox="0 0 256 256"
+            >
+              <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+            </svg>
+          </div>
+
+          <div
+            className={`absolute top-10 left-0 w-48 flex p-1 bg-neutral-bg border border-border rounded-md shadow ${open ? "block" : "hidden"}`}
+            ref={popupRef}
           >
-            <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
-          </svg>
+            <ul className="w-full flex flex-col">
+              <li className="flex w-full">
+                <button className="w-full p-2 text-start text-sm rounded-md cursor-pointer hover:bg-highlight">
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
