@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, Navigate } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
 
@@ -7,6 +7,11 @@ function PageContainer() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   const isAppRoute = location.pathname.startsWith("/app");
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    return <Navigate to={"/"} replace />
+  }
 
   return (
     <>
