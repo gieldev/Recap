@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // App Pages
 import Dashboard from "./AppPages/Dashboard";
@@ -25,34 +25,33 @@ import SignIn from "./GlobalComponents/SignIn";
 function App() {
 
   return (
-      <Routes>
-        <Route path="/auth" element={<Auth />}>
-          <Route path="/auth/signup" element={<SignUp />} />
-          <Route path="/auth/signin" element={<SignIn />} />
-        </Route>
-        
+    <Routes>
+      <Route path="/" element={<Navigate to="/app/dashboard" replace />} />
+      
+      <Route path="/auth" element={<Auth />}>
+        <Route path="/auth/signup" element={<SignUp />} />
+        <Route path="/auth/signin" element={<SignIn />} />
+      </Route>
+
+      <Route path="/app" element={<PageContainer />}>
+        {/* App Pages */}
+        <Route path="/app/dashboard" element={<Dashboard />} />
+        <Route path="/app/reviewers" element={<Reviewers />} />
+        <Route path="/app/create" element={<Create />} />
+
+        {/* Create App Pages */}
         <Route
-          path="/app"
-          element={<PageContainer />}
-        >
-          {/* App Pages */}
-          <Route path="/app/dashboard" element={<Dashboard />} />
-          <Route path="/app/reviewers" element={<Reviewers />} />
-          <Route path="/app/create" element={<Create />} />
+          path="/app/create/multiple-choices"
+          element={<MultipleChoices />}
+        />
 
-          {/* Create App Pages */}
-          <Route
-            path="/app/create/multiple-choices"
-            element={<MultipleChoices />}
-          />
-
-          {/* Review App Pages */}
-          <Route
-            path="/app/reviewer/multiple-choices/:id"
-            element={<MultipleChoicesQuiz />}
-          />
-        </Route>
-      </Routes>
+        {/* Review App Pages */}
+        <Route
+          path="/app/reviewer/multiple-choices/:id"
+          element={<MultipleChoicesQuiz />}
+        />
+      </Route>
+    </Routes>
   );
 }
 
