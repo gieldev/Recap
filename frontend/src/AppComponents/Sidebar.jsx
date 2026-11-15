@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, replace, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { useState, useRef, useEffect } from "react";
 
@@ -8,6 +8,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
   const [open, setOpen] = useState(false);
   const popupRef = useRef(null);
+
+  const navigation = useNavigate();
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -25,6 +27,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
+
+    navigation("/auth/signin", { replace: true });
   }
 
   return (

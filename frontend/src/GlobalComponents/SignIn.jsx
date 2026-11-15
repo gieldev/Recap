@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigation = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -25,6 +28,8 @@ function SignIn() {
     localStorage.setItem("token", data.token);
 
     console.log("Signed in: ", data);
+
+    navigation("/app/dashboard", { replace: true });
   };
 
   return (
