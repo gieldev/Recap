@@ -15,7 +15,7 @@ function PageContainer() {
 
   return (
     <>
-      <div className="h-screen flex">
+      <div className="min-h-screen flex">
         {isAppRoute && (
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         )}
