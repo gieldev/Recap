@@ -97,7 +97,9 @@ function MultipleChoices() {
       console.log("Generated Quiz:", quiz);
       alert("Quiz generated successfully! Check the console for details.");
 
-      navigation(`/quiz/${quiz.quizId}`, { replace: true });
+      navigation(`/app/reviewer/multiple-choices/${quiz.quizId}`, {
+        replace: true,
+      });
     } catch (error) {
       console.error(error);
       return alert("Failed to generate quiz.");
