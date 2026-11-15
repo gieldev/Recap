@@ -53,7 +53,7 @@ function Reviewers() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(
+      const update = await fetch(
         "http://localhost:3000/data/user/reviewers/delete",
         {
           method: "DELETE",
@@ -67,10 +67,24 @@ function Reviewers() {
         },
       );
 
-      const res = await response.json();
+      const upd = await update.json();
 
-      console.log(res);
-      window.location.reload();
+      console.log(upd);
+
+      const response = await fetch(
+        "http://localhost:3000/data/user/reviewers",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      const res = await response.json()
+
+      setReviewers(res.reviewers);
+
     } catch (error) {}
   };
 
