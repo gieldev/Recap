@@ -7,7 +7,11 @@ const connectToDatabase = require("./config/Db");
 // Connect to MongoDB
 connectToDatabase(); 
 
-const allowedOrigins = ["https://recap-szsi.onrender.com/"];
+const allowedOrigins = [
+  "https://recap-szsi.onrender.com/",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
 
 app.use(cors({
   origin: allowedOrigins,
