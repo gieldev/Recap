@@ -10,7 +10,7 @@ connectToDatabase();
 const allowedOrigins = [
   "https://recap-szsi.onrender.com/",
   "http://localhost:5173",
-  "http://localhost:3000",
+  "https://recap-pearl.vercel.app",
 ];
 
 app.use(cors({
