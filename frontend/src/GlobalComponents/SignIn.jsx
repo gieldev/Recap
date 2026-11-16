@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -60,6 +60,11 @@ function SignIn() {
         <button className="px-4 py-3 text-sm text-contrast-primary bg-primary border rounded-md cursor-pointer">
           Sign In
         </button>
+        <div>
+          <p>
+            No account? <Link to={"/auth/signup"}>Sign up</Link>
+          </p>
+        </div>
       </form>
     </>
   );
