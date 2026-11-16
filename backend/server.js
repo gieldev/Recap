@@ -7,7 +7,13 @@ const connectToDatabase = require("./config/Db");
 // Connect to MongoDB
 connectToDatabase(); 
 
-app.use(cors());
+const allowedOrigins = ["https://recap-szsi.onrender.com/"];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(express.json());
 
 const authMiddleware = require("./middleware/middleware");
