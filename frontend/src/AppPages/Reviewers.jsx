@@ -25,7 +25,7 @@ function Reviewers() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:3000/data/user/reviewers",
+        `${import.meta.env.VITE_API_URL}data/user/reviewers`,
         {
           method: "GET",
           headers: {
@@ -54,7 +54,7 @@ function Reviewers() {
       const token = localStorage.getItem("token");
 
       const update = await fetch(
-        "http://localhost:3000/data/user/reviewers/delete",
+        `${import.meta.env.VITE_API_URL}data/user/reviewers/delete`,
         {
           method: "DELETE",
           headers: {
@@ -72,7 +72,7 @@ function Reviewers() {
       console.log(upd);
 
       const response = await fetch(
-        "http://localhost:3000/data/user/reviewers",
+        `${import.meta.env.VITE_API_URL}data/user/reviewers`,
         {
           method: "GET",
           headers: {
@@ -93,7 +93,7 @@ function Reviewers() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:3000/data/user/reviewers/download",
+        `${import.meta.env.VITE_API_URL}data/user/reviewers/download`,
         {
           method: "POST",
           headers: {

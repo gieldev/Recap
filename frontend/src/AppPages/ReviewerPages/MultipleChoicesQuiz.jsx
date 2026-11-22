@@ -21,7 +21,7 @@ function MultipleChoicesQuiz() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `http://localhost:3000/data/user/find/${id}`,
+          `${import.meta.env.VITE_API_URL}data/user/find/${id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
             signal: controller.signal,

@@ -71,7 +71,7 @@ function MultipleChoices() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:3000/api/ai/create/quiz/${quizType}`,
+        `${import.meta.env.VITE_API_URL}api/ai/create/quiz/${quizType}`,
         {
           method: "POST",
           headers: {
