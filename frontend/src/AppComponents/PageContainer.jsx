@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Outlet, useLocation, Navigate } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
+import PrivacyModal from "./modals/PrivacyModal";
 
 function PageContainer() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -21,10 +22,12 @@ function PageContainer() {
         )}
         
         <main
-          className={`flex-1 flex flex-col min-h-screen h-full px-16 py-16 gap-8 bg-contrast-bg transition-all duration-300 ${sidebarOpen ? "ml-0" : "lg:ml-72"}`}
+          className={`min-h-screen h-full flex-1 flex flex-col px-16 py-16 gap-8 bg-contrast-bg transition-all duration-300 ${sidebarOpen ? "ml-0" : "lg:ml-72"}`}
         >
           <Outlet />
         </main>
+
+        <PrivacyModal />
       </div>
     </>
   );

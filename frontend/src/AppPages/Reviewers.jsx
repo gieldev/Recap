@@ -170,7 +170,7 @@ function Reviewers() {
                 </svg>
 
                 <div
-                  className={`absolute top-full right-0 flex flex-col p-2 gap-1 bg-neutral-white border border-border rounded-md shadow z-10 ${visible === index ? "block" : "hidden"}`}
+                  className={`absolute top-full right-0 flex flex-col p-2 gap-1 bg-neutral-white border border-border rounded-md shadow z-1 ${visible === index ? "block" : "hidden"}`}
                 >
                   <button
                     className="text-start text-sm cursor-pointer"
