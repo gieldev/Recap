@@ -35,6 +35,7 @@ RecallIt/
 │   ├── middleware/
 │   ├── models/
 │   ├── routes/
+│   ├── utils/
 │   ├── server.js
 │   └── package.json
 │
@@ -70,6 +71,8 @@ RecallIt/
 - Storing other neccessary data
 
 ## Data Flow
+
+TBC
 
 ### Reviewer Generation
 
