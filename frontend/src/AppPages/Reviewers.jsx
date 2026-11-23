@@ -138,12 +138,12 @@ function Reviewers() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4" ref={popupRef}>
         {reviewers.map((reviewer, index) => (
           <Link
-            className="group h-48 flex flex-col justify-between p-2 gap-4 bg-neutral-bg border border-border rounded-md shadow cursor-pointer transition-transform duration-300 hover:scale-101"
+            className="group h-48 flex flex-col justify-between px-4 py-4 gap-4 bg-neutral-bg border border-border rounded-md shadow cursor-pointer transition-transform duration-300 hover:scale-101"
             key={index}
             to={`/app/reviewer/${reviewer.quizType}/${reviewer._id}`}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium">{reviewer.quizType}</span>
+              <span className="text-xs font-medium">{reviewer.quizType.toUpperCase().replace("-", " ")}</span>
               <div className="relative">
                 <svg
                   className="w-5 h-5 text-text-secondary transition-colors duration-300 group-hover:text-text-secondary"
