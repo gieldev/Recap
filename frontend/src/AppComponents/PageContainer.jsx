@@ -10,6 +10,8 @@ function PageContainer() {
   const isAppRoute = location.pathname.startsWith("/app");
   const token = localStorage.getItem("token");
 
+  const [active, setActive] = useState(false);
+
   if (!token) {
     return <Navigate to={"/auth/signin"} replace />
   }
@@ -18,7 +20,7 @@ function PageContainer() {
     <>
       <div className="min-h-screen flex">
         {isAppRoute && (
-          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} active={active} setActive={setActive} />
         )}
         
         <main
@@ -27,7 +29,7 @@ function PageContainer() {
           <Outlet />
         </main>
 
-        <PrivacyModal />
+        <PrivacyModal active={active} setActive={setActive} />
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import { Link, replace, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { useState, useRef, useEffect } from "react";
 
-function Sidebar({ sidebarOpen, setSidebarOpen }) {
+function Sidebar({ sidebarOpen, setSidebarOpen, active, setActive }) {
   const token = localStorage.getItem("token");
   const decoded = jwtDecode(token);
 
@@ -65,6 +65,14 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                   onClick={handleSignOut}
                 >
                   Sign out
+                </button>
+              </li>
+              <li className="flex w-full">
+                <button
+                  className="w-full p-2 text-start text-sm rounded-md cursor-pointer hover:bg-highlight"
+                  onClick={() => setActive(!active)}
+                >
+                  Privacy Policy
                 </button>
               </li>
             </ul>

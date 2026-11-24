@@ -1,12 +1,34 @@
-function PrivacyModal() {
+function PrivacyModal({ active, setActive}) {
+
   return (
     <>
-      <div className="absolute top-0 left-0 h-screen inset-0 flex items-center p-12 ml-0 justify-center bg-black/50 z-3 lg:ml-72">
+      <div
+        className={`absolute top-0 left-0 h-screen inset-0 flex items-center p-12 ml-0 justify-center bg-black/50 z-3 lg:ml-72 ${active ? "block" : "hidden"}`}
+      >
         <div className="w-full h-full bg-neutral-bg rounded-xl overflow-y-auto">
           <div>
-            <header className="flex flex-col px-8 py-4">
-              <h1>Privacy Policy for RecallIt</h1>
-              <p>Last Updated: November 23, 2026</p>
+            <header className="flex items-center justify-between px-8 py-4">
+              <div className="flex flex-col">
+                <h1>Privacy Policy for RecallIt</h1>
+                <p>Last Updated: November 23, 2026</p>
+              </div>
+
+              <svg
+                className="lucide lucide-x preview-icon cursor-pointer"
+                onClick={() => setActive(!active)}
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
             </header>
             {/* Contents */}
             <div>
@@ -95,13 +117,15 @@ function PrivacyModal() {
                 {/* Changes */}
                 <li>
                   <h2>Changes</h2>
-                  <p className="flex px-8">If we change this policy, we'll update the date above.</p>
+                  <p className="flex px-8">
+                    If we change this policy, we'll update the date above.
+                  </p>
                 </li>
                 {/* Contact */}
                 <li>
                   <h2>Contact</h2>
                   <p className="flex px-8">
-                    Questions? Email <a>arg.ducut@gmail.com</a>
+                    Questions? Email:<a>arg.ducut@gmail.com</a>
                   </p>
                 </li>
               </ol>
