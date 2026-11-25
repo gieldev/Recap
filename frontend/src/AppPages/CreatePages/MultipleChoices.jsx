@@ -13,7 +13,7 @@ function MultipleChoices() {
   const [description, setDescription] = useState("");
   const [numItems, setNumItems] = useState("");
   const [quizType, setQuizType] = useState("");
-  const [reference, setReference] = useState("");
+  const [learningMaterials, setLearningMaterials] = useState([]);
   const [instructions, setInstructions] = useState("");
 
   // State variables for handling files
@@ -23,37 +23,39 @@ function MultipleChoices() {
   const navigation = useNavigate();
 
   const handleFile = async (e) => {
-    for (let i = 0; i < e.target.files.length ; i++) {
+    const cap = 4;
+
+    if (e.target.files.length > cap - selectedFile.length) {
+      return alert("limit");
+    }
+
+    for (let i = 0; i < e.target.files.length; i++) {
       const file = e.target.files[i];
-
-      if (file) {
-        setSelectedFile((prev) => [...prev, file]);
-      }
-
       const buffer = await file.arrayBuffer();
-
-      const pdf = await pdfjs.getDocument({
-        data: buffer,
-      }).promise;
 
       let text = "";
 
-      for (let j = 1; j <= pdf.numPages; j++) {
-        const page = await pdf.getPage(j);
-        const content = await page.getTextContent();
+      try {
+        const pdf = await pdfjs.getDocument({ data: buffer }).promise;
 
-        const pageText = content.items.map((item) => item.str).join(" ");
-
-        text += pageText + "\n";
+        for (let j = 1; j <= pdf.numPages; j++) {
+          const page = await pdf.getPage(j);
+          const content = await page.getTextContent();
+          const pageText = content.items.map((item) => item.str).join(" ");
+          text += pageText + "\n";
+        }
+      } catch (error) {
+        return alert("corrupted file detected");
       }
 
-      setReference((prev) => prev + text);
+      setSelectedFile((prev) => [...prev, file]);
+      setLearningMaterials((prev) => [...prev, text]);
     }
   };
 
   useEffect(() => {
-    console.log(reference);
-  }, [reference]);
+    console.log(learningMaterials);
+  }, [learningMaterials]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +72,7 @@ function MultipleChoices() {
       return alert("Please select a quiz type.");
     }
 
-    if (!reference) {
+    if (!learningMaterials) {
       return alert("Please upload a PDF file.");
     }
 
@@ -90,7 +92,7 @@ function MultipleChoices() {
             description,
             numItems,
             quizType,
-            learningMaterial: reference,
+            learningMaterials: learningMaterials,
           }),
         },
       );
