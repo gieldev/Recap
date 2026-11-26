@@ -48,8 +48,15 @@ function MultipleChoices() {
         return alert("corrupted file detected");
       }
 
-      setSelectedFile((prev) => [...prev, file]);
-      setLearningMaterials((prev) => [...prev, text]);
+      setLearningMaterials((prev) => {
+        if (prev.includes(text)) {
+          console.log("dup found");
+          return prev;
+        } else {
+          setSelectedFile((prev) => [...prev, file]);
+          return [...prev, text];
+        }
+      });
     }
   };
 
