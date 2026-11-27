@@ -37,12 +37,30 @@ router.post("/create/quiz/multiple-choices", async (req, res) => {
   try {
     const { topic, description, numItems, quizType, learningMaterial } = req.body;
 
+    if (!Array.isArray(learningMaterial)) {
+      return res.status(400).json({
+        message: "Not an array"
+      });
+    }
+
+    if (learningMaterial.length > 4) {
+      return res.status(400).json({
+        message: "cap"
+      });
+    } 
+
+    if (!learningMaterial.every(item => typeof item === "string")) {
+      return res.status(400).json({
+        message: "Not string"        
+      });
+    }
+
     const response = await ai.models.generateContent({
       model: "gemini-3.5-flash-lite",
       contents: `
-        TOPIC: ${topic || "Infer from the learning material"}
+        TOPIC: ${topic}
 
-        REQUIRED NUMBER OF QUESTIONS: ${numItems} || "15"
+        REQUIRED NUMBER OF QUESTIONS: ${numItems}
 
         LEARNING MATERIAL: ${learningMaterial}
 
